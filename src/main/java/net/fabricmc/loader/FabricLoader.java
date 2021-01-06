@@ -169,7 +169,10 @@ public class FabricLoader implements net.fabricmc.loader.api.FabricLoader {
 	}
 
 	public Path getModsDir() {
-		return getGameDir().resolve("mods");
+		return getGameDir()
+			.resolve("norisk")
+			.resolve("mods")
+			.resolve(getGameProvider().getNormalizedGameVersion());
 	}
 
 	@Deprecated
