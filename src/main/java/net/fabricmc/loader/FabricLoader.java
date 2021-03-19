@@ -256,7 +256,7 @@ public class FabricLoader implements net.fabricmc.loader.api.FabricLoader {
 		// add mods to classpath
 		// TODO: This can probably be made safer, but that's a long-term goal
 		for (ModContainer mod : mods) {
-			if (!mod.getInfo().getId().equals("fabricloader")) {
+			if (!mod.getInfo().getId().equals("fabricloader") && !mod.getInfo().getType().equals("builtin")) {
 				FabricLauncherBase.getLauncher().propose(mod.getOriginUrl());
 			}
 		}
@@ -413,8 +413,6 @@ public class FabricLoader implements net.fabricmc.loader.api.FabricLoader {
 	private void setupMods() {
 		for (ModContainer mod : mods) {
 			try {
-				mod.setupRootPath();
-
 				for (String in : mod.getInfo().getOldInitializers()) {
 					String adapter = mod.getInfo().getOldStyleLanguageAdapter();
 					entrypointStorage.addDeprecated(mod, adapter, in);
